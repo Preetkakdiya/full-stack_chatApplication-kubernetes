@@ -186,33 +186,57 @@ This project is evolving, and here are a few exciting things on the horizon:
 
 * [ ] **CI/CD Pipelines:** Implement Continuous Integration and Continuous Deployment pipelines to automate testing and deployment.
 * [ ] **Feature Expansion:** Add more features like group chats, media sharing, and user status updates.
-* **Stay tuned for updates as we continue to improve and expand this project!**
+
 
 
 
 --------------------------------------------------------------------
 
-## for k8s
-PS D:\chatApp\full-stack_chatApplication\k8s> kubectl apply -f .\namespace.yml -n chat-app
-namespace/chat-app created
-PS D:\chatApp\full-stack_chatApplication\k8s> kubectl apply -f .\mongodb-pv.yml -n chat-app        
-persistentvolume/mongodb-pv created
-PS D:\chatApp\full-stack_chatApplication\k8s> kubectl apply -f .\mongodb-pvc.yml -n chat-app
-persistentvolumeclaim/mongodb-pvc created
-PS D:\chatApp\full-stack_chatApplication\k8s> kubectl apply -f .                            
+## Kubernetes Deployment Steps
+
+Apply namespace:
+
+```bash
+kubectl apply -f namespace.yml -n chat-app
+```
+
+Create MongoDB persistent storage:
+
+```bash
+kubectl apply -f mongodb-pv.yml -n chat-app
+kubectl apply -f mongodb-pvc.yml -n chat-app
+```
+
+Deploy all Kubernetes resources:
+
+```bash
+kubectl apply -f .
+```
+
+Expected output:
+
+```
 deployment.apps/backend-deployment created
 service/backend created
 deployment.apps/frontend-deployment created
 service/frontend created
 ingress.networking.k8s.io/chatapp-ingress created
 deployment.apps/mongodb-deployment created
-persistentvolume/mongodb-pv unchanged
-persistentvolumeclaim/mongodb-pvc unchanged
 service/mongodb created
-namespace/chat-app unchanged
-PS D:\chatApp\full-stack_chatApplication\k8s> 
-PS D:\chatApp\full-stack_chatApplication\k8s> sudo -E kubectl port-forward svc/ingress-nginx-controller -n ingress-nginx 81:80
-Launched C:\ProgramData\chocolatey\bin\kubectl.exe in a new window.
+```
+
+Forward ingress controller port:
+
+```bash
+kubectl port-forward svc/ingress-nginx-controller -n ingress-nginx 81:80
+```
+
+Open application in browser:
+
+```
+http://localhost:81
+```
+
 
 
 
